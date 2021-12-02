@@ -51,7 +51,7 @@
     }
 
     function sortData() {
-      UTdata.order("score",true).fetchAll()
+      UTdata.order("score", true).fetchAll()
         .then(function(results) {
           let msg = "";
           for (let i = 0; i < results.length; i++) {
@@ -74,7 +74,20 @@
     }
 
     function deleteData() {
-      $("#display").html("delete does not work");
+      UTdata.fetch()
+        .then(function(results) {
+          return results.delete();
+        })
+        .then(function(results) {
+          $("#display").removeClass();
+          $("#display").addClass("bg-success");
+          $("#display").addClass("delete success");
+        })
+        .catch(function(error) {
+          $("#display").removeClass();
+          $("#display").addClass("bg-warning");
+          $("#display").html("delete fail:" + JSON.stringify(error));
+        })
     }
 
     function updateData() {
