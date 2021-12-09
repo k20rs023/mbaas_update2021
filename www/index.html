@@ -72,7 +72,9 @@
     function countData() {
       UTdata.count().fetchAll()
         .then(function(results) {
-          return results.count();
+          $("#display").removeClass();
+          $("#display").addClass("bg-success");
+          $("#display").html(results.count);
         })
         .catch(function(error) {
           $("#display").removeClass();
